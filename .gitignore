@@ -1,0 +1,10 @@
+*.msa
+*.txt
+*.bat
+*.access^
+*.xcl
+*.exe
+*.r07
+*.lst
+*.s19
+*.inf
