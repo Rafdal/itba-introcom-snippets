@@ -8,3 +8,7 @@
 *.lst
 *.s19
 *.inf
+
+!clear.msa
+!clear.s19
+!clear.lst

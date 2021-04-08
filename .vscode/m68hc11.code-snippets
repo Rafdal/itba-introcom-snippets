@@ -16,15 +16,6 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Load": {
-	 	"scope": "z80-macroasm",
-	 	"prefix": "ld",
-	 	"body": [
-	 		"${1|ldaa,ldab,ldx|}",
-	 		"$2"
-	 	],
-		"description": "load val"
-	},
 
 	"for": {
 		"scope": "z80-macroasm",
@@ -45,11 +36,11 @@
 		"description": "crea un for de n ciclos"
 	},
 
-	"Organization pos": {
+	"Org-pos": {
 	 	"scope": "z80-macroasm",
-	 	"prefix": "org",
+	 	"prefix": "org-pos",
 	 	"body": [
-	 		"ORG\t\\$${0:0000}",
+	 		"org\t\\$${0:0000}",
 	 	],
 		"description": "set org zone"
 	},
@@ -58,8 +49,8 @@
 		"scope": "z80-macroasm",
 		"prefix": "main",
 		"body": [
-			"\tORG\t\\$2000",
-			"main\tEQU\t*",
+			"\torg\t\\$2000",
+			"main\tequ\t*",
 			"\t$0",
 		],
 	       "description": "set org zone"
@@ -70,7 +61,7 @@
 	"prefix": "fin",
 	"body": [
 		"fin\tjmp\tfin",
-		"\tEND",
+		"\tend",
 	],
        "description": "fin del programa"       
 	},
@@ -78,7 +69,7 @@
 	"Constante": {
 		"scope": "z80-macroasm",
 		"prefix": "const",
-		"body": ["${1:name}\tEQU\t${0:10}"],
+		"body": ["${1:NAME}\tequ\t${0:10}"],
 	       "description": "declarar una constante tipo #DEFINE"
 	},
 
@@ -87,9 +78,68 @@
 		"prefix": "stack-data",
 		"body": [
 			"\tORG\t\\$${1:0000}\t\tFLACO ESTO VA AL FINAL DEL CODIGO",
-			"stack\tRMB\t${2:size}",
-			"stk_ini\tEQU\t*-1",
+			"stack\trmb\t${2:size}",
+			"stk_ini\tequ\t*-1",
 		],
 	       "description": "coloco los datos del stack"
+	},
+
+	"swap-d-x": {
+		"scope": "z80-macroasm",
+		"prefix": "swap-d-x",
+		"body": [
+			"xgdx\t\tX<-->D",
+		],
+	       "description": "intercambia el registro X con el D"
+	},
+
+	"variable-global": {
+		"scope": "z80-macroasm",
+		"prefix": "var-global",
+		"body": [
+			"\torg\t\\$${1:0000}",
+			"${2:nombre}\trmb\t${0:1}",
+		],
+	},
+
+	"BVS": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-overflow-set-BVS",
+		"body": ["${1:bvs}\t${0:goto}\t\tbranch if overflow set",],
+	},
+	"BVC": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-overflow-clear-BVC",
+		"body": ["${1:bvc}\t${0:goto}\t\tbranch if overflow clear",],
+	},
+	"BNE": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-not-zero-BNE",
+		"body": ["${1:bne}\t${0:goto}\t\tbranch if not = zero",],
+	},
+	"BEQ": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-zero-beq",
+		"body": ["${1:beq}\t${0:goto}\t\tbranch if = zero",],
+	},
+	"BPL": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-positive-bpl",
+		"body": ["${1:bpl}\t${0:goto}\t\tbranch if positive (N=0)",],
+	},
+	"BMI": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-negative-bmi",
+		"body": ["${1:bmi}\t${0:goto}\t\tbranch if negative (N=1)",],
+	},
+	"BCC": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-carry-clear-bcc",
+		"body": ["${1:bcc}\t${0:goto}\t\tbranch if carry clear (C=0)",],
+	},
+	"BCS": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-carry-set-bcs",
+		"body": ["${1:bcs}\t${0:goto}\t\tbranch if carry set (C=1)",],
 	},
 }

@@ -1,0 +1,24 @@
+	p68h11
+
+
+
+	org	$2000
+main	equ	*
+	
+	ldx	#$201D
+
+	ldy	#$0FFF		repeticiones del contador (va en el main, loop o lo que sea)
+repite	EQU	*
+	clr	0,X
+	inx
+	dey
+	bne	repite
+
+	ldd	#0
+	ldx	#0
+	ldy	#0
+
+fin	jmp	fin
+	
+
+	END
