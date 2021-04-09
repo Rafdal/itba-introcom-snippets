@@ -17,23 +17,37 @@
 	// 	"description": "Log output to console"
 	// }
 
-	"for": {
+	"for-reg": {
 		"scope": "z80-macroasm",
-		"prefix": "for",
+		"prefix": "repite-for-registro",
 		"body": [
-			"${2:max}\tEQU\t${3:8}\t\tveces que se ejecuta el codigo (ES UN DEFINE, va arriba)",
+			"${2:VECES}\tequ\t${3:8}\t\tveces que se ejecuta el codigo (ES UNA CONSTANTE, va arriba)",
 			"",
-			"${1:cont1}\tRMB\t1\t\treservo un byte de memoria para el contador (va en p ej: ORG \\$0060)",
+			"\tldaa\t#${2:VECES}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
+			"repite\t${4:codigo}",
+			"\t",
+			"\tdeca",
+			"\tbne\trepite"
+		],
+		"description": "crea un for de n ciclos, el contador se en el registro A"
+	},
+	"for-mem": {
+		"scope": "z80-macroasm",
+		"prefix": "repite-for-memoria",
+		"body": [
+			"${2:VECES}\tequ\t${3:8}\t\tveces que se ejecuta el codigo (ES UNA CONSTANTE, va arriba)",
+			"",
+			"${1:cont1}\trmb\t1\t\treservo un byte de memoria para el contador (va abajo, y p.ej ORG \\$0060)",
 			"",
 			"",
-			"\tldaa\t#${2:max}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
+			"\tldaa\t#${2:VECES}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
 			"\tstaa\t${1:cont1}\t\tguardo las repeteciones en la variable",
-			"repite\tEQU\t*",
-			"\t${4:codigo}",
+			"repite\t${4:codigo}",
+			"\t",
 			"\tdec\t${1:cont1}",
 			"\tbne\trepite"
 		],
-		"description": "crea un for de n ciclos"
+		"description": "crea un for de n ciclos, el contador se guarda en memoria"
 	},
 
 	"Org-pos": {
@@ -141,5 +155,23 @@
 		"scope": "z80-macroasm",
 		"prefix": "branch-carry-set-bcs",
 		"body": ["${1:bcs}\t${0:goto}\t\tbranch if carry set (C=1)",],
+	},
+	"BRA": {
+		"scope": "z80-macroasm",
+		"prefix": "branch-always-bra",
+		"body": ["${1:bra}\t${0:goto}\t\tbranch always",],
+	},
+
+
+
+	"block-comment": {
+		"scope": "z80-macroasm",
+		"prefix": "block-comment",
+		"body": [
+			"*********************************************************",
+			"*\t\t${1:TITULO}",
+			"* ${2:texto}",
+			"*********************************************************",
+		],
 	},
 }

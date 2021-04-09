@@ -1,6 +1,6 @@
 ################################################################################
 #                                                                              #
-#    Micro Series 6801 Assembler V2.00/DOS              08/Apr/21  00:15:53    #
+#    Micro Series 6801 Assembler V2.00/DOS              08/Apr/21  22:59:43    #
 #                                                                              #
 #       Source   =   clear.msa                                                 #
 #       List     =   clear.lst                                                 #
@@ -22,16 +22,16 @@
     9                         
    10  2000 CE201D            ldx     #$201D
    11                 
-   12  2003 18CE0FFF          ldy     #$0FFF          repeticiones del contador (va en el main, loop o lo que sea)
-   13  2007           repite  EQU     *
-   14  2007 6F00              clr     0,X
-   15  2009 08                inx
-   16  200A 1809              dey
-   17  200C 26F9              bne     repite
-   18                 
-   19  200E CC0000            ldd     #0
-   20  2011 CE0000            ldx     #0
-   21  2014 18CE0000          ldy     #0
+   12  2003 18CE2FFF          ldy     #$2FFF          repeticiones del contador (va en el main, loop o lo que sea)
+   13  2007 6F00      repite  clr     0,X
+   14  2009 08                inx
+   15  200A 1809              dey
+   16  200C 26F9              bne     repite
+   17                 
+   18  200E CC0000            ldd     #0
+   19  2011 CE0000            ldx     #0
+   20  2014 18CE0000          ldy     #0
+   21                 
    22                 
    23  2018 7E2018    fin     jmp     fin
    24                         
@@ -40,5 +40,5 @@
 
     Errors:  None          #########
     Bytes:   27            # clear #
-    CRC:     967E          #########
+    CRC:     5E35          #########
 
