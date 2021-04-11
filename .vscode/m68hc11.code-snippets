@@ -21,8 +21,6 @@
 		"scope": "z80-macroasm",
 		"prefix": "repite-for-registro",
 		"body": [
-			"${2:VECES}\tequ\t${3:8}\t\tveces que se ejecuta el codigo (ES UNA CONSTANTE, va arriba)",
-			"",
 			"\tldaa\t#${2:VECES}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
 			"repite\t${4:codigo}",
 			"\t",
@@ -35,9 +33,7 @@
 		"scope": "z80-macroasm",
 		"prefix": "repite-for-memoria",
 		"body": [
-			"${2:VECES}\tequ\t${3:8}\t\tveces que se ejecuta el codigo (ES UNA CONSTANTE, va arriba)",
-			"",
-			"${1:cont1}\trmb\t1\t\treservo un byte de memoria para el contador (va abajo, y p.ej ORG \\$0060)",
+			"${1:cont1}\trmb\t1\t\treservo un byte de memoria para el contador (va abajo, y p.ej org \\$0060)",
 			"",
 			"",
 			"\tldaa\t#${2:VECES}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
@@ -75,7 +71,6 @@
 	"prefix": "fin",
 	"body": [
 		"fin\tjmp\tfin",
-		"\tend",
 	],
        "description": "fin del programa"       
 	},
@@ -91,7 +86,7 @@
 		"scope": "z80-macroasm",
 		"prefix": "stack-data",
 		"body": [
-			"\tORG\t\\$${1:0000}\t\tFLACO ESTO VA AL FINAL DEL CODIGO",
+			"\torg\t\\$${1:0000}\t\tFLACO ESTO VA AL FINAL DEL CODIGO",
 			"stack\trmb\t${2:size}",
 			"stk_ini\tequ\t*-1",
 		],
@@ -164,14 +159,81 @@
 
 
 
-	"block-comment": {
+	"sblock-comment": {
 		"scope": "z80-macroasm",
-		"prefix": "block-comment",
+		"prefix": "small-block-comment",
 		"body": [
 			"*********************************************************",
 			"*\t\t${1:TITULO}",
 			"* ${2:texto}",
 			"*********************************************************",
 		],
+	},
+	"bblock-comment": {
+		"scope": "z80-macroasm",
+		"prefix": "big-block-comment",
+		"body": [
+			"*****************************************************************************************",
+			"*\t\t${1:TITULO}",
+			"* ${2:texto}",
+			"*****************************************************************************************",
+		],
+	},
+	"consigna-comment": {
+		"scope": "z80-macroasm",
+		"prefix": "consigna-comment",
+		"body": [
+			"*****************************************************************************************************************",
+			"*\t\tTP2\tEJERCICIO ${1:0}\t\t\tGRUPO 1\t\t\t\t\t\t\t*",
+			"*\t\t\t\t\t\t\t\t\t\t\t\t\t\t*",
+			"* Consigna:\t\t\t\t\t\t\t\t\t\t\t\t\t*",
+			"*",
+			"*****************************************************************************************************************",
+		],
+	},
+
+	
+	"include": {
+		"scope": "z80-macroasm",
+		"prefix": "include",
+		"body": ["$$..\\NEWUSER\\\\${1:FILE}.MSA"],
+	},
+
+	"backups": {
+		"scope": "z80-macroasm",
+		"prefix": "backups",
+		"body": [
+			"*\tpsha",
+			"*\tpshb",
+			"*\tpshy",
+		],
+	},
+	"devolver-backups": {
+		"scope": "z80-macroasm",
+		"prefix": "devolver-backups",
+		"body": [
+			"*\tpuly",
+			"*\tpulb",
+			"*\tpula",
+		],
+	},
+
+	"void-func": {
+		"scope": "z80-macroasm",
+		"prefix": "void-func",
+		"body": [
+			"\torg\t\\$${1:0000}",
+			"${2:func}\tequ\t*",
+			"\tpshx\t\tbackup de X",
+			"\ttsx\t\tX=SP+1",
+			"${3:backups}",
+			"",
+			"*\tcodigo",
+			"",
+			"${4:devolver-backups}",
+			"\tpulx",
+			"\trts",
+		],
+		"description": "Una función que no retorna valores"
 	},
 }

@@ -8,12 +8,18 @@
 main	equ	*
 	
 	ldx	#$201D
-
 	ldy	#$2FFF		repeticiones del contador (va en el main, loop o lo que sea)
-repite	clr	0,X
+L00	clr	0,X
 	inx
 	dey
-	bne	repite
+	bne	L00
+
+	ldx	#0
+	ldy	#$01EF		repeticiones del contador (va en el main, loop o lo que sea)
+L01	clr	0,X
+	inx
+	dey
+	bne	L01
 
 	ldd	#0
 	ldx	#0
@@ -23,4 +29,4 @@ repite	clr	0,X
 fin	jmp	fin
 	
 
-	END
+	end
