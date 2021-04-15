@@ -14,6 +14,13 @@ L00	clr	0,X
 	dey
 	bne	L00
 
+	ldaa	#VECES		repeticiones del contador (va en el main, loop o lo que sea)
+repite	codigo
+	
+	deca
+	bne	repite
+
+
 	ldx	#0
 	ldy	#$01EF		repeticiones del contador (va en el main, loop o lo que sea)
 L01	clr	0,X
