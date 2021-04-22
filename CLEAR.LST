@@ -1,6 +1,6 @@
 ################################################################################
 #                                                                              #
-#    Micro Series 6801 Assembler V2.00/DOS              10/Apr/21  18:15:21    #
+#    Micro Series 6801 Assembler V2.00/DOS              21/Apr/21  15:07:13    #
 #                                                                              #
 #       Source   =   clear.msa                                                 #
 #       List     =   clear.lst                                                 #
@@ -20,31 +20,27 @@
     7  2000                   org     $2000
     8  2000           main    equ     *
     9                         
-   10  2000 CE201D            ldx     #$201D
+   10  2000 CE2028            ldx     #$2028
    11  2003 18CE2FFF          ldy     #$2FFF          repeticiones del contador (va en el main, loop o lo que sea)
    12  2007 6F00      L00     clr     0,X
    13  2009 08                inx
    14  200A 1809              dey
    15  200C 26F9              bne     L00
    16                 
-   17  200E CE0000            ldx     #0
-   18  2011 18CE01EF          ldy     #$01EF          repeticiones del contador (va en el main, loop o lo que sea)
-   19  2015 6F00      L01     clr     0,X
-   20  2017 08                inx
-   21  2018 1809              dey
-   22  201A 26F9              bne     L01
-   23                 
-   24  201C CC0000            ldd     #0
-   25  201F CE0000            ldx     #0
-   26  2022 18CE0000          ldy     #0
-   27                 
-   28                 
-   29  2026 7E2026    fin     jmp     fin
-   30                         
-   31                 
-   32  2029                   end
+   17  200E 18CE01FF          ldy     #$01FF          repeticiones del contador (va en el main, loop o lo que sea)
+   18  2012 186F00    L01     clr     0,Y
+   19  2015 1809              dey
+   20  2017 26F9              bne     L01
+   21                 
+   22  2019 CC0000            ldd     #0
+   23  201C CE0000            ldx     #0
+   24  201F 18CE0000          ldy     #0
+   25                 
+   26  2023 7E2023    fin     jmp     fin
+   27                         
+   28  2026                   end
 
     Errors:  None          #########
-    Bytes:   41            # clear #
-    CRC:     A3D1          #########
+    Bytes:   38            # clear #
+    CRC:     B149          #########
 

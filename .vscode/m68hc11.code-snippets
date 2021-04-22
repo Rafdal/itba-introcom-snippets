@@ -33,7 +33,7 @@
 		"scope": "z80-macroasm",
 		"prefix": "repite-for-memoria",
 		"body": [
-			"${1:cont1}\trmb\t1\t\treservo un byte de memoria para el contador (va abajo, y p.ej org \\$0060)",
+			"${1:cont1}\tRMB\t1\t\treservo un byte de memoria para el contador (va abajo, y p.ej org \\$0060)",
 			"",
 			"",
 			"\tldaa\t#${2:VECES}\t\trepeticiones del contador (va en el main, loop o lo que sea)",
@@ -50,7 +50,7 @@
 	 	"scope": "z80-macroasm",
 	 	"prefix": "org-pos",
 	 	"body": [
-	 		"org\t\\$${0:0000}",
+	 		"ORG\t\\$${0:0000}",
 	 	],
 		"description": "set org zone"
 	},
@@ -59,8 +59,8 @@
 		"scope": "z80-macroasm",
 		"prefix": "main",
 		"body": [
-			"\torg\t\\$2000",
-			"main\tequ\t*",
+			"\tORG\t\\$2000",
+			"main\tEQU\t*",
 			"\t$0",
 		],
 	       "description": "set org zone"
@@ -78,7 +78,7 @@
 	"Constante": {
 		"scope": "z80-macroasm",
 		"prefix": "const",
-		"body": ["${1:NAME}\tequ\t${0:10}"],
+		"body": ["${1:NAME}\tEQU\t${0:10}"],
 	       "description": "declarar una constante tipo #DEFINE"
 	},
 
@@ -86,9 +86,9 @@
 		"scope": "z80-macroasm",
 		"prefix": "stack-data",
 		"body": [
-			"\torg\t\\$${1:0000}\t\tFLACO ESTO VA AL FINAL DEL CODIGO",
-			"stack\trmb\t${2:size}",
-			"stk_ini\tequ\t*-1",
+			"\tORG\t\\$${1:0000}\t\tFLACO ESTO VA AL FINAL DEL CODIGO",
+			"stack\tRMB\t${2:size}",
+			"stk_ini\tEQU\t*-1",
 		],
 	       "description": "coloco los datos del stack"
 	},
@@ -106,8 +106,8 @@
 		"scope": "z80-macroasm",
 		"prefix": "var-global",
 		"body": [
-			"\torg\t\\$${1:0000}",
-			"${2:nombre}\trmb\t${0:1}",
+			"\tORG\t\\$${1:0000}",
+			"${2:nombre}\tRMB\t${0:1}",
 		],
 	},
 
@@ -222,8 +222,8 @@
 		"scope": "z80-macroasm",
 		"prefix": "void-func",
 		"body": [
-			"\torg\t\\$${1:0000}",
-			"${2:func}\tequ\t*",
+			"\tORG\t\\$${1:0000}",
+			"${2:func}\tEQU\t*",
 			"\tpshx\t\tbackup de X",
 			"\ttsx\t\tX=SP+1",
 			"${3:backups}",
