@@ -102,9 +102,9 @@
 	       "description": "intercambia el registro X con el D"
 	},
 
-	"variable-global": {
+	"variable-global-rmb": {
 		"scope": "z80-macroasm",
-		"prefix": "var-global",
+		"prefix": "var-global-rmb",
 		"body": [
 			"\tORG\t\\$${1:0000}",
 			"${2:nombre}\tRMB\t${0:1}",
@@ -236,4 +236,18 @@
 		],
 		"description": "Una función que no retorna valores"
 	},
+
+	"form constant character": {
+		"scope": "z80-macroasm",
+		"prefix": "FCC",
+		"body": "${1:strName}\tFCC\t${2:'CADENA DE TEXTO'}",
+		"description": "arma una str char pa"
+	},
+
+	"form constant byte": {
+		"scope": "z80-macroasm",
+		"prefix": "FCB",
+		"body": "${1:name}\tFCB\t$20,$0,$02",
+		"description": "arma un byte array pa"
+	}
 }
